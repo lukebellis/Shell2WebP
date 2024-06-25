@@ -1,5 +1,25 @@
 #!/bin/bash
 
+# Function to check if cwebp is installed
+check_cwebp() {
+    if ! command -v cwebp &> /dev/null
+    then
+        echo "cwebp could not be found. Attempting to install..."
+        sudo apt-get update
+        sudo apt-get install -y webp
+
+        # Verify the installation
+        if ! command -v cwebp &> /dev/null
+        then
+            echo "Installation of cwebp failed. Exiting."
+            exit 1
+        fi
+    fi
+}
+
+# Check for cwebp
+check_cwebp
+
 # Ask for confirmation
 read -p "Convert all images in the current directory to WebP and delete the originals? (y/n) " -n 1 -r
 echo    # Move to a new line
@@ -16,6 +36,8 @@ then
             if [ $? -eq 0 ]; then
                 # Delete the original file
                 rm "$file"
+            else
+                echo "Failed to convert $file"
             fi
         fi
     done
