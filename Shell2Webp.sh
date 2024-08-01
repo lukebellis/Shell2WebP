@@ -26,6 +26,9 @@ echo    # Move to a new line
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+    # Initialise a counter for processed files
+    count=0
+
     # Loop through all image files in the current directory
     for file in *.{jpg,jpeg,png,gif}; do
         # Check if the file exists to avoid errors with no matching files
@@ -36,11 +39,20 @@ then
             if [ $? -eq 0 ]; then
                 # Delete the original file
                 rm "$file"
+                echo "Converted and deleted: $file"
+                count=$((count + 1))
             else
                 echo "Failed to convert $file"
             fi
         fi
     done
+
+    # Provide feedback on the number of files processed
+    if [ $count -gt 0 ]; then
+        echo "$count files were successfully converted and deleted."
+    else
+        echo "No files were converted."
+    fi
 else
     echo "Conversion cancelled."
 fi
