@@ -2,13 +2,6 @@
 
 Shell2WebP is a simple Bash script for converting images in the current directory to the WebP format and optionally deleting the originals. 
 
-**Prerequisites**
-
-Before you start, make sure `cwebp` is installed on your system. It's part of the WebP package and can be installed on Ubuntu or Debian-based systems with:
-
-**sudo apt-get updatesudo apt-get install webp**
-
-
 **Installation**
 
 1.  Clone the repository 
