@@ -1,6 +1,6 @@
 **Shell2WebP**
 
-Shell2WebP is a simple Bash script for converting images in the current directory to the WebP format and optionally deleting the originals. It's perfect for web developers and photographers looking to optimise their image sizes for faster loading times on websites.
+Shell2WebP is a simple Bash script for converting images in the current directory to the WebP format and optionally deleting the originals. 
 
 **Prerequisites**
 
