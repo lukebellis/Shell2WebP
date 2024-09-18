@@ -49,9 +49,27 @@ check_cwebp() {
     fi
 }
 
+# Function to check if rsvg-convert or ImageMagick (convert) is installed for SVG processing
+check_svg_converter() {
+    if ! command -v rsvg-convert &> /dev/null && ! command -v convert &> /dev/null; then
+        echo "Neither rsvg-convert nor ImageMagick (convert) could be found. Attempting to install librsvg2-bin or imagemagick..."
+        sudo apt-get update
+        sudo apt-get install -y librsvg2-bin imagemagick
+
+        # Verify the installation
+        if ! command -v rsvg-convert &> /dev/null && ! command -v convert &> /dev/null; then
+            echo "Installation of a suitable SVG converter failed. Exiting."
+            exit 1
+        fi
+    fi
+}
+
 # Install cwebp if not present
 check_cwebp
 
+# Install rsvg-convert or ImageMagick if not present
+check_svg_converter
+
 # Inform the user
-echo "Setup complete. You can now use the webp command to convert images to WebP."
+echo "Setup complete. You can now use the webp command to convert images (JPG, JPEG, PNG, GIF, and SVG) to WebP."
 echo "To convert images to WebP, run: webp"
